@@ -1,0 +1,19 @@
+.title {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 40px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bold;
+  color: aquamarine;
+}
+
+.contentBox {
+  text-align: center;
+  margin-top: 100px;
+  display: inline-block;
+}
+
+.createBtn {
+  background-color: white;
+  border: 1px solid #ddd;
+}
