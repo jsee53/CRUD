@@ -1,4 +1,4 @@
-html {
+/* html {
   margin: auto;
 }
 body {
@@ -24,3 +24,67 @@ body {
   height: 100%;
   background-color: aliceblue;
 }
+
+.board_title {
+  font-size: 30px;
+  padding-top: 20px;
+  margin-left: 20px;
+}
+
+.create {
+  text-align: center;
+  float: right;
+  margin-right: 30px;
+  margin-top: 30px;
+}
+
+.createBtn {
+  color: white;
+  font-size: 15px;
+  background-color: cornflowerblue;
+  border: none;
+  padding: 10px;
+}
+
+.content {
+  margin-top: 100px;
+}
+
+.content_table {
+  border-collapse: collapse;
+  margin-left: 40px;
+}
+
+tr {
+  border-top: 1px solid #ddd;
+}
+
+td {
+  padding: 20px;
+  padding-left: 120px;
+}
+
+.viewBtn {
+  border: none;
+  background-color: rgb(61, 184, 191);
+  color: white;
+  padding: 8px;
+}
+
+.editBtn {
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  padding: 8px;
+}
+
+.delectBtn {
+  border: none;
+  background-color: red;
+  color: white;
+  padding: 8px;
+}
+
+button:hover {
+  cursor: pointer;
+} */
