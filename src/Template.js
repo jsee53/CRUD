@@ -1,4 +1,5 @@
 const { mainModule } = require("process");
+var fs = require("fs");
 
 var template = {
   HTML: function (title, content) {
@@ -140,18 +141,27 @@ var template = {
   `;
   },
   CONTENT: function (filelist, date) {
-    var contents = `<tr><td>asdf</td></tr>`;
+    var contents = "";
+    var first_line;
     for (var i = 0; i < filelist.length; i++) {
       var first_line = fs
-        .readFileSync(`"${filelist[i]}.txt"`)
+        .readFileSync(`../file/${filelist[i]}`)
         .toString()
         .split("\n");
-      // contents += `<tr>
-      // <td>${i}</td>
-      // <td>${title}</td>
-      // <td>${first_line}</td>
-      // <td>${date}</td>
-      // </tr>`;
+
+      contents += `<tr>
+      <td>${i + 1}</td>
+      <td>${filelist[i]}</td>
+      <td>${first_line + "..."}</td>
+      <td>${date}</td>
+      <td>
+        <button class="viewBtn"><a href="/?${filelist[i]}">View</a></button>
+        <button class="editBtn"><a href="/update?id=${
+          filelist[i]
+        }">Edit</a></button>
+        <button class="delectBtn"><a href="/?delete_process">Delect</a></button>
+      </td>
+      </tr>`;
     }
     return contents;
   },

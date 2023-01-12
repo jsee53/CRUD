@@ -18,12 +18,25 @@ var app = http.createServer(function (request, response) {
     //메인 화면
     if (queryData.id === undefined) {
       fs.readdir("../file", function (error, filelist) {
-        date = "2023-01-12";
+        date = new Date();
+        date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`;
         content = template.CONTENT(filelist, date);
         return_HTML = template.HTML(title, content);
         response.writeHead(200);
         response.end(return_HTML);
       });
+    } else if (pathname === "/create") {
+      fs.readdir("../file", function (error, filelist) {
+        date = new Date();
+        date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`;
+        content = template.CONTENT(filelist, date);
+        return_HTML = template.HTML(title, content);
+        response.writeHead(200);
+        response.end(return_HTML);
+      });
+    } else if (pathname === "delete_process") {
+      response.writeHead(200);
+      response.end("??");
     } else {
       response.writeHead(200);
       response.end("??");
