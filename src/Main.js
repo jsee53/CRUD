@@ -25,22 +25,22 @@ var app = http.createServer(function (request, response) {
         response.writeHead(200);
         response.end(return_HTML);
       });
-    } else if (pathname === "/create") {
-      fs.readdir("../file", function (error, filelist) {
-        date = new Date();
-        date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`;
-        content = template.CONTENT(filelist, date);
-        return_HTML = template.HTML(title, content);
-        response.writeHead(200);
-        response.end(return_HTML);
-      });
-    } else if (pathname === "delete_process") {
-      response.writeHead(200);
-      response.end("??");
     } else {
       response.writeHead(200);
       response.end("??");
     }
+  } else if (pathname === "/create") {
+    fs.readdir("../file", function (error, filelist) {
+      date = new Date();
+      date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`;
+      content = template.CONTENT(filelist, date);
+      return_HTML = template.HTML(title, content);
+      response.writeHead(200);
+      response.end(return_HTML);
+    });
+  } else if (pathname === "delete_process") {
+    response.writeHead(200);
+    response.end("??");
   }
   //접속이 실패할 때
   else {

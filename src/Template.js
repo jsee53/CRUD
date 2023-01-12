@@ -8,7 +8,7 @@ var template = {
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="Main.css" />
-    <title>${title}</title>
+    <title>게시판</title>
   </head>
   <body>
     <nav class="title">자유로운 공간</nav>
