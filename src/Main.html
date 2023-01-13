@@ -39,7 +39,7 @@
                     <button class="editBtn">
                       <a href="/edit?id=${title}">Edit</a>
                     </button>
-                    <form action="delete">
+                    <form action="delete" class="delete_form">
                       <input type="hidden" name="title" value="${title}" />
                       <input type="submit" class="delectBtn" value="Delete" />
                     </form>
@@ -133,6 +133,14 @@
     background-color: cornflowerblue;
     color: white;
     padding: 8px;
+  }
+
+  .delete_form {
+    display: inline;
+  }
+
+  .delete_form:hover {
+    cursor: pointer;
   }
 
   .delectBtn {

@@ -27,15 +27,14 @@ var app = http.createServer(function (request, response) {
         response.end(return_HTML);
       });
     } else {
+      title = queryData.id;
+      return_HTML = template.view_HTML(title);
       response.writeHead(200);
-      response.end("??");
+      response.end(return_HTML);
     }
   } else if (pathname === "/create") {
     fs.readdir("../file", function (error, filelist) {
-      date = new Date();
-      date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-      content = template.CONTENT(filelist, date);
-      return_HTML = template.create_HTML();
+      return_HTML = template.create_HTML(filelist.length);
       response.writeHead(200);
       response.end(return_HTML);
     });
@@ -50,7 +49,7 @@ var app = http.createServer(function (request, response) {
       content = post.content;
       date = post.date;
       fs.writeFile(`../file/${title}`, content, "utf-8", function (err) {
-        response.writeHead(302, { Location: "/" });
+        response.writeHead(302, { Location: `/` });
         response.end();
       });
     });
@@ -58,11 +57,19 @@ var app = http.createServer(function (request, response) {
     response.writeHead(200);
     response.end("edit");
   } else if (pathname === "/delete") {
-    response.writeHead(200);
-    response.end("??");
-  } else if (pathname === `${title}`) {
-    response.writeHead(200);
-    response.end("?ddd?");
+    var receive_data = "";
+    request.on("data", function (data) {
+      receive_data += data;
+    });
+    request.on("end", function () {
+      var post = qs.parse(receive_data);
+      title = post.title;
+      var filteredTitle = path.parse(title).base;
+      fs.unlink(`../file/${title}`, function (error) {
+        response.writeHead(302, { Location: "/" });
+        response.end();
+      });
+    });
   }
   //접속이 실패할 때
   else {

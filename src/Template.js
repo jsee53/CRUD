@@ -63,7 +63,6 @@ var template = {
   }
 
   .board {
-    height: 100%;
     background-color: aliceblue;
   }
 
@@ -124,11 +123,19 @@ var template = {
     padding: 8px;
   }
 
+  .delete_form {
+    display: inline;
+  }
+
   .delectBtn {
     border: none;
     background-color: red;
     color: white;
     padding: 8px;
+  }
+
+  .delectBtn:hover{
+    cursor:pointer;
   }
 
   a{
@@ -162,7 +169,7 @@ var template = {
         <button class="editBtn"><a href="/edit?id=${
           filelist[i]
         }">Edit</a></button>
-        <form action="delete">
+        <form action="/delete" class="delete_form" method="post">
           <input type="hidden" name="title" value="${filelist[i]}" />
           <input type="submit" class="delectBtn" value="Delete" />
         </form>
@@ -172,7 +179,7 @@ var template = {
     return contents;
   },
 
-  create_HTML: function () {
+  create_HTML: function (id_number) {
     return `
     <html lang="ko">
   <head>
@@ -191,9 +198,10 @@ var template = {
             <input
               type="text"
               name="id"
-              placeholder="ID"
+              placeholder="${id_number + 1}"
               onfocus="this.placeholder = ''"
-              onblur="this.placeholder = 'ID'"
+              onblur="this.placeholder = '${id_number + 1}'"
+              disabled
             />
             <p>Title</p>
             <input
@@ -307,6 +315,65 @@ var template = {
     cursor: pointer;
   }
 </style>
+    `;
+  },
+  view_HTML: function (title) {
+    return `
+    <html lang="ko">
+    <head>
+      <meta charset="UTF-8" />
+      <title>게시판</title>
+    </head>
+    <body>
+      <nav class="title">자유로운 공간</nav>
+      <div class="window">
+        <div class="board">
+          <div class="frame">
+            ${title}
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
+  
+  <style>
+    html {
+      margin: auto;
+    }
+    body {
+      margin: 0;
+      background-color: rgb(242, 240, 240);
+    }
+  
+    .title {
+      background-color: black;
+      padding: 20px;
+      padding-left: 100px;
+      font-size: 25px;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      font-weight: bold;
+      color: white;
+    }
+  
+    .window {
+      padding: 30px;
+    }
+  
+    .board {
+      height: 100%;
+      background-color: aliceblue;
+      text-align: center;
+    }
+  
+    .frame {
+      margin-top: 30px;
+      border: 2px solid #ddd;
+      box-shadow: 3px;
+      display: inline-block;
+      padding: 30px 50px;
+    }
+  </style>
+  
     `;
   },
 };
