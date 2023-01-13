@@ -23,7 +23,7 @@ var template = {
           <div>
             <table class="content_table">
               <tbody>
-               <tr>
+               <tr class="table_title">
                <td>ID</td>
                <td>Title</td>
                <td>Contents</td>
@@ -97,6 +97,10 @@ var template = {
     margin-left: 40px;
   }
 
+  .table_title{
+    font-weight:bold;
+  }
+
   tr {
     border-top: 1px solid #ddd;
   }
@@ -154,11 +158,14 @@ var template = {
       <td>${first_line + "..."}</td>
       <td>${date}</td>
       <td>
-        <button class="viewBtn"><a href="/?${filelist[i]}">View</a></button>
-        <button class="editBtn"><a href="/update?id=${
+        <button class="viewBtn"><a href="/?id=${filelist[i]}">View</a></button>
+        <button class="editBtn"><a href="/edit?id=${
           filelist[i]
         }">Edit</a></button>
-        <button class="delectBtn"><a href="/?delete_process">Delect</a></button>
+        <form action="delete">
+          <input type="hidden" name="title" value="${filelist[i]}" />
+          <input type="submit" class="delectBtn" value="Delete" />
+        </form>
       </td>
       </tr>`;
     }

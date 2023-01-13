@@ -33,9 +33,16 @@
                   <td>테스트입니다</td>
                   <td>Jan 12, 2022</td>
                   <td>
-                    <button class="viewBtn">View</button>
-                    <button class="editBtn">Edit</button>
-                    <button class="delectBtn">Delect</button>
+                    <button class="viewBtn">
+                      <a href="/?id=${title}">View</a>
+                    </button>
+                    <button class="editBtn">
+                      <a href="/edit?id=${title}">Edit</a>
+                    </button>
+                    <form action="delete">
+                      <input type="hidden" name="title" value="${title}" />
+                      <input type="submit" class="delectBtn" value="Delete" />
+                    </form>
                   </td>
                 </tr>
               </tbody>

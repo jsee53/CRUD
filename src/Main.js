@@ -3,6 +3,7 @@ var fs = require("fs");
 var url = require("url");
 var qs = require("querystring");
 const template = require("./Template.js");
+const path = require("path");
 
 var app = http.createServer(function (request, response) {
   var request_url = request.url;
@@ -39,19 +40,24 @@ var app = http.createServer(function (request, response) {
       response.end(return_HTML);
     });
   } else if (pathname === "/create_process") {
-    var data = "";
-    request.on("receive_data", function (data) {
-      data = receive_data;
-      var post = qs.parse(data);
+    var receive_data = "";
+    request.on("data", function (data) {
+      receive_data += data;
+    });
+    request.on("end", function () {
+      var post = qs.parse(receive_data);
       title = post.title;
       content = post.content;
       date = post.date;
+      fs.writeFile(`../file/${title}`, content, "utf-8", function (err) {
+        response.writeHead(302, { Location: "/" });
+        response.end();
+      });
     });
-    fs.writeFile(`../file/${title}`, "content", "utf-8", function (err) {
-      response.writeHead(302, { Location: "http://www.google.com" });
-      response.writeHead(200);
-    });
-  } else if (pathname === "delete_process") {
+  } else if (pathname === "/edit") {
+    response.writeHead(200);
+    response.end("edit");
+  } else if (pathname === "/delete") {
     response.writeHead(200);
     response.end("??");
   } else if (pathname === `${title}`) {
