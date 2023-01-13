@@ -8,19 +8,41 @@
     <nav class="title">자유로운 공간</nav>
     <div class="window">
       <div class="board">
-        <div phase>Create a Board</div>
-        <form action="/create_process" method="post">
-          <p>ID</p>
-          <input type="text" name="id" placeholder="ID" />
-          <p>Title</p>
-          <input type="text" name="title" placeholder="Title" />
-          <p>Content</p>
-          <input type="text" name="content" placeholder="Content" />
-          <input type="hidden" name="date" value="date" />
-        </form>
-
-        <div class="cancle">Cancle</div>
-        <div class="save">Save</div>
+        <div class="frame">
+          <div class="phase">Create a Board</div>
+          <form action="create_process" method="post">
+            <p>ID</p>
+            <input
+              type="text"
+              name="id"
+              placeholder="ID"
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'ID'"
+            />
+            <p>Title</p>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title"
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'Title'"
+            />
+            <p>Content</p>
+            <textarea
+              name="content"
+              id="content_area"
+              cols="30"
+              rows="10"
+              placeholder="Content"
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'Content'"
+            ></textarea>
+            <input type="hidden" name="date" value="date" />
+            <br />
+            <input type="submit" class="save" value="Save" />
+            <button class="cancle">Cancle</button>
+          </form>
+        </div>
       </div>
     </div>
   </body>
@@ -55,22 +77,57 @@
     text-align: center;
   }
 
+  .frame {
+    margin-top: 30px;
+    border: 2px solid #ddd;
+    box-shadow: 3px;
+    display: inline-block;
+    padding: 30px 50px;
+  }
+
   .phase {
-    font-size: large;
+    font-size: 20px;
+    display: inline-block;
+    padding: 20px;
+    width: 200px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  input {
+    width: 240px;
+    height: 30px;
+  }
+
+  textarea::placeholder {
+    font-weight: 560;
+    color: rgb(143, 143, 143);
   }
 
   .cancle {
-    margin-top: 20px;
     color: white;
+    margin-top: 50px;
     background-color: rgb(179, 187, 194);
     display: inline-block;
+    height: 30px;
     padding: 5px 10px;
+    border: none;
   }
 
   .save {
+    margin-top: 50px;
     color: white;
+    width: 80px;
     background-color: rgb(158, 200, 236);
     display: inline-block;
     padding: 5px 10px;
+    border: none;
+  }
+
+  .cancle:hover {
+    cursor: pointer;
+  }
+
+  .save {
+    cursor: pointer;
   }
 </style>

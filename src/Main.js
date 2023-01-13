@@ -19,9 +19,9 @@ var app = http.createServer(function (request, response) {
     if (queryData.id === undefined) {
       fs.readdir("../file", function (error, filelist) {
         date = new Date();
-        date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`;
+        date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
         content = template.CONTENT(filelist, date);
-        return_HTML = template.HTML(title, content);
+        return_HTML = template.main_HTML(title, content);
         response.writeHead(200);
         response.end(return_HTML);
       });
@@ -32,15 +32,31 @@ var app = http.createServer(function (request, response) {
   } else if (pathname === "/create") {
     fs.readdir("../file", function (error, filelist) {
       date = new Date();
-      date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`;
+      date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       content = template.CONTENT(filelist, date);
-      return_HTML = template.HTML(title, content);
+      return_HTML = template.create_HTML();
       response.writeHead(200);
       response.end(return_HTML);
+    });
+  } else if (pathname === "/create_process") {
+    var data = "";
+    request.on("receive_data", function (data) {
+      data = receive_data;
+      var post = qs.parse(data);
+      title = post.title;
+      content = post.content;
+      date = post.date;
+    });
+    fs.writeFile(`../file/${title}`, "content", "utf-8", function (err) {
+      response.writeHead(302, { Location: "http://www.google.com" });
+      response.writeHead(200);
     });
   } else if (pathname === "delete_process") {
     response.writeHead(200);
     response.end("??");
+  } else if (pathname === `${title}`) {
+    response.writeHead(200);
+    response.end("?ddd?");
   }
   //접속이 실패할 때
   else {

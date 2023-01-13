@@ -2,12 +2,11 @@ const { mainModule } = require("process");
 var fs = require("fs");
 
 var template = {
-  HTML: function (title, content) {
+  main_HTML: function (title, content) {
     return `  
     <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="Main.css" />
     <title>게시판</title>
   </head>
   <body>
@@ -70,8 +69,8 @@ var template = {
 
   .board_title {
     font-size: 30px;
-    padding-top: 20px;
-    margin-left: 20px;
+    padding-top: 30px;
+    margin-left: 30px;
   }
 
   .create {
@@ -164,6 +163,144 @@ var template = {
       </tr>`;
     }
     return contents;
+  },
+
+  create_HTML: function () {
+    return `
+    <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="Main.css" />
+    <title>게시판</title>
+  </head>
+  <body>
+    <nav class="title">자유로운 공간</nav>
+    <div class="window">
+      <div class="board">
+        <div class="frame">
+          <div class="phase">Create a Board</div>
+          <form action="/create_process" method="post">
+            <p>ID</p>
+            <input
+              type="text"
+              name="id"
+              placeholder="ID"
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'ID'"
+            />
+            <p>Title</p>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title"
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'Title'"
+            />
+            <p>Content</p>
+            <textarea
+              name="content"
+              id="content_area"
+              cols="30"
+              rows="10"
+              placeholder="Content"
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'Content'"
+            ></textarea>
+            <input type="hidden" name="date" value="date" />
+            <br />
+            <input type="submit" class="save" value="Save" />
+            <button class="cancle">Cancle</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  html {
+    margin: auto;
+  }
+  body {
+    margin: 0;
+    background-color: rgb(242, 240, 240);
+  }
+
+  .title {
+    background-color: black;
+    padding: 20px;
+    padding-left: 100px;
+    font-size: 25px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-weight: bold;
+    color: white;
+  }
+
+  .window {
+    padding: 30px;
+  }
+
+  .board {
+    height: 100%;
+    background-color: aliceblue;
+    text-align: center;
+  }
+
+  .frame {
+    margin-top: 30px;
+    border: 2px solid #ddd;
+    box-shadow: 2px 3px 5px 0px;
+    display: inline-block;
+    padding: 30px 50px;
+  }
+
+  .phase {
+    font-size: 20px;
+    display: inline-block;
+    padding: 20px;
+    width: 200px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  input {
+    width: 240px;
+    height: 30px;
+  }
+
+  textarea::placeholder {
+    font-weight: 560;
+    color: rgb(143, 143, 143);
+  }
+
+  .cancle {
+    color: white;
+    margin-top: 50px;
+    background-color: rgb(179, 187, 194);
+    display: inline-block;
+    height: 30px;
+    padding: 5px 10px;
+    border: none;
+  }
+
+  .save {
+    margin-top: 50px;
+    color: white;
+    width: 80px;
+    background-color: rgb(158, 200, 236);
+    display: inline-block;
+    padding: 5px 10px;
+    border: none;
+  }
+
+  .cancle:hover {
+    cursor: pointer;
+  }
+
+  .save {
+    cursor: pointer;
+  }
+</style>
+    `;
   },
 };
 module.exports = template;
