@@ -28,9 +28,11 @@ var app = http.createServer(function (request, response) {
       });
     } else {
       title = queryData.id;
-      return_HTML = template.view_HTML(title);
-      response.writeHead(200);
-      response.end(return_HTML);
+      fs.readFile(`../file/${title}`, "utf-8", function (err, content) {
+        return_HTML = template.view_HTML(title, content);
+        response.writeHead(200);
+        response.end(return_HTML);
+      });
     }
   } else if (pathname === "/create") {
     fs.readdir("../file", function (error, filelist) {

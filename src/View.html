@@ -1,13 +1,36 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="Main.css" />
     <title>게시판</title>
   </head>
   <body>
     <nav class="title">자유로운 공간</nav>
     <div class="window">
       <div class="board">
-        <div class="frame"></div>
+        <div class="frame">
+          <div class="phase">Post</div>
+          <form action="create_process" method="post">
+            <p>ID</p>
+            <input type="text" name="id" placeholder="ID" readonly />
+            <p>Title</p>
+            <input type="text" name="title" placeholder="Title" readonly />
+            <p>Content</p>
+            <textarea
+              name="content"
+              id="content_area"
+              cols="30"
+              rows="10"
+              placeholder="Content"
+              readonly
+              style="resize: none"
+            ></textarea>
+            <input type="hidden" name="date" value="date" />
+            <br />
+            <input type="submit" class="edit" value="Edit" />
+            <button class="cancle">Cancle</button>
+          </form>
+        </div>
       </div>
     </div>
   </body>
@@ -48,5 +71,45 @@
     box-shadow: 3px;
     display: inline-block;
     padding: 30px 50px;
+  }
+
+  .phase {
+    font-size: 20px;
+    display: inline-block;
+    padding: 20px;
+    width: 200px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  input {
+    width: 240px;
+    height: 30px;
+  }
+
+  textarea::placeholder {
+    font-weight: 560;
+    color: rgb(143, 143, 143);
+  }
+
+  .cancle {
+    color: white;
+    margin-top: 50px;
+    background-color: rgb(179, 187, 194);
+    display: inline-block;
+    height: 30px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .edit {
+    margin-top: 50px;
+    color: white;
+    width: 80px;
+    background-color: rgb(158, 200, 236);
+    display: inline-block;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
   }
 </style>
