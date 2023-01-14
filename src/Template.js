@@ -144,7 +144,6 @@ var template = {
     color: white;
   }
 </style>
-
   `;
   },
   CONTENT: function (filelist, date) {
@@ -175,13 +174,11 @@ var template = {
     }
     return contents;
   },
-
   create_HTML: function (id_number) {
     return `
     <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="Main.css" />
     <title>게시판</title>
   </head>
   <body>
@@ -196,8 +193,6 @@ var template = {
               type="text"
               name="id"
               placeholder="${id_number + 1}"
-              onfocus="this.placeholder = ''"
-              onblur="this.placeholder = '${id_number + 1}'"
               disabled
             />
             <p>Title</p>
@@ -323,7 +318,7 @@ var template = {
       <div class="board">
         <div class="frame">
           <div class="phase">Post</div>
-          <form action="create_process" method="post">
+          <form action="/" method="post">
             <p>ID</p>
             <input type="text" name="id" placeholder="ID" readonly />
             <p>Title</p>
@@ -340,7 +335,7 @@ var template = {
             ></textarea>
             <input type="hidden" name="date" value="date" />
             <br />
-            <input type="submit" class="edit" value="Edit" />
+            <button class="edit"><a href="/edit?id=${title}">Edit</a></button>
             <button class="cancle">Cancle</button>
           </form>
         </div>
@@ -419,11 +414,17 @@ var template = {
     margin-top: 50px;
     color: white;
     width: 80px;
+    height:30px;
     background-color: rgb(158, 200, 236);
     display: inline-block;
     padding: 5px 10px;
     border: none;
     cursor: pointer;
+  }
+
+  a{
+    text-decoration: none;
+    color:white;
   }
 </style>
     `;
