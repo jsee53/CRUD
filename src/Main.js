@@ -27,13 +27,24 @@ var app = http.createServer(function (request, response) {
         response.end(return_HTML);
       });
     } else {
-      title = queryData.id;
+      response.writeHead(200);
+      response.end(return_HTML);
+    }
+  } else if (pathname === "/view") {
+    var receive_data = "";
+    request.on("data", function (data) {
+      receive_data += data;
+    });
+    request.on("end", function () {
+      var post = qs.parse(receive_data);
+      title = post.title;
+      id_number = post.id_number;
       fs.readFile(`../file/${title}`, "utf-8", function (err, content) {
-        return_HTML = template.view_HTML(title, content);
+        return_HTML = template.view_HTML(title, content, id_number);
         response.writeHead(200);
         response.end(return_HTML);
       });
-    }
+    });
   } else if (pathname === "/create") {
     fs.readdir("../file", function (error, filelist) {
       return_HTML = template.create_HTML(filelist.length);
@@ -56,8 +67,20 @@ var app = http.createServer(function (request, response) {
       });
     });
   } else if (pathname === "/edit") {
-    response.writeHead(200);
-    response.end("edit");
+    var receive_data = "";
+    request.on("data", function (data) {
+      receive_data += data;
+    });
+    request.on("end", function () {
+      var post = qs.parse(receive_data);
+      title = post.title;
+      id_number = post.id_number;
+      fs.readFile(`../file/${title}`, "utf-8", function (err, content) {
+        return_HTML = template.edit_HTML(title, content, id_number);
+        response.writeHead(200);
+        response.end(return_HTML);
+      });
+    });
   } else if (pathname === "/delete") {
     var receive_data = "";
     request.on("data", function (data) {
@@ -66,7 +89,6 @@ var app = http.createServer(function (request, response) {
     request.on("end", function () {
       var post = qs.parse(receive_data);
       title = post.title;
-      var filteredTitle = path.parse(title).base;
       fs.unlink(`../file/${title}`, function (error) {
         response.writeHead(302, { Location: "/" });
         response.end();
