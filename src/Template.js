@@ -209,7 +209,7 @@ var template = {
             <p>ID</p>
             <input
               type="text"
-              name="id"
+              name="id_number"
               placeholder="${id_number + 1}"
               disabled
             />
@@ -327,7 +327,6 @@ var template = {
       <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="Main.css" />
     <title>게시판</title>
   </head>
   <body>
@@ -338,9 +337,9 @@ var template = {
           <div class="phase">Post</div>
           <form action="/edit" method="post" style="display: inline;">
             <p>ID</p>
-            <input type="text" name="id" placeholder=${id_number} readonly />
+            <input type="text" name="id_number" placeholder=${id_number} value="${id_number}" readonly />
             <p>Title</p>
-            <input type="text" name="title" placeholder=${title} readonly />
+            <input type="text" name="title" placeholder=${title} value="${title}" readonly />
             <p>Content</p>
             <textarea
               name="content"
@@ -350,8 +349,7 @@ var template = {
               placeholder=${content}
               readonly
               style="resize: none"
-            ></textarea>
-            <input type="hidden" name="date" value="date" />
+            >${content}</textarea>
             <br />
             <input type="submit" class="edit" value="Edit" />
           </form>
@@ -397,6 +395,7 @@ var template = {
     box-shadow: 3px;
     display: inline-block;
     padding: 30px 50px;
+    box-shadow: 2px 3px 5px 0px;
   }
 
   .phase {
@@ -449,7 +448,7 @@ var template = {
   },
   edit_HTML: function (title, content, id_number) {
     return `
-    <html lang="ko">
+      <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <title>게시판</title>
@@ -459,17 +458,12 @@ var template = {
     <div class="window">
       <div class="board">
         <div class="frame">
-          <div class="phase" ">Edit a Board</div>
-          <form action="/Edit_process" method="post" style="display: inline;>
+          <div class="phase">Edit a Board</div>
+          <form action="/view" method="post" style="display: inline;">
             <p>ID</p>
-            <input
-              type="text"
-              name="id"
-              placeholder=${id_number}
-              disabled
-            />
+            <input type="text" name="id_number" placeholder=${id_number} value="${id_number}" readonly />
             <p>Title</p>
-            <input type="text" name="title" placeholder=${title} />
+            <input type="text" name="title" placeholder=${title} value="${title}" />
             <p>Content</p>
             <textarea
               name="content"
@@ -478,8 +472,7 @@ var template = {
               rows="10"
               placeholder=${content}
               style="resize: none"
-            ></textarea>
-            <input type="hidden" name="date" value="date" />
+            >${content}</textarea>
             <br />
             <input type="submit" class="save" value="Save" />
           </form>
@@ -522,9 +515,10 @@ var template = {
   .frame {
     margin-top: 30px;
     border: 2px solid #ddd;
-    box-shadow: 2px 3px 5px 0px;
+    box-shadow: 3px;
     display: inline-block;
     padding: 30px 50px;
+    box-shadow: 2px 3px 5px 0px;
   }
 
   .phase {
@@ -560,14 +554,20 @@ var template = {
     margin-top: 50px;
     color: white;
     width: 80px;
+    height:30px;
     background-color: rgb(158, 200, 236);
     display: inline-block;
     padding: 5px 10px;
     border: none;
     cursor: pointer;
   }
+
+  a{
+    text-decoration: none;
+    color:white;
+  }
 </style>
-`;
+    `;
   },
 };
 module.exports = template;

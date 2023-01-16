@@ -60,7 +60,6 @@ var app = http.createServer(function (request, response) {
       var post = qs.parse(receive_data);
       title = post.title;
       content = post.content;
-      date = post.date;
       fs.writeFile(`../file/${title}`, content, "utf-8", function (err) {
         response.writeHead(302, { Location: `/` });
         response.end();
