@@ -459,11 +459,12 @@ var template = {
       <div class="board">
         <div class="frame">
           <div class="phase">Edit a Board</div>
-          <form action="/view" method="post" style="display: inline;">
+          <form action="/edit_process" method="post" style="display: inline;">
             <p>ID</p>
-            <input type="text" name="id_number" placeholder=${id_number} value="${id_number}" readonly />
+            <input type="text" name="id_number" value="${id_number}" readonly />
             <p>Title</p>
-            <input type="text" name="title" placeholder=${title} value="${title}" />
+            <input type="hidden" name="title" value="${title}" />
+            <input type="text" name="edit_title" value="${title}" />
             <p>Content</p>
             <textarea
               name="content"

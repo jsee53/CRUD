@@ -80,6 +80,24 @@ var app = http.createServer(function (request, response) {
         response.end(return_HTML);
       });
     });
+  } else if (pathname === "/edit_process") {
+    var receive_data = "";
+    request.on("data", function (data) {
+      receive_data += data;
+    });
+    request.on("end", function () {
+      var post = qs.parse(receive_data);
+      var edit_title = post.edit_title;
+      title = post.title;
+      content = post.content;
+      id_number = post.id_number;
+      fs.rename(`../file/${title}`, `../file/${edit_title}`, function (error) {
+        fs.writeFile(`../file/${edit_title}`, content, "utf8", function (err) {
+          response.writeHead(302, { Location: "/" });
+          response.end();
+        });
+      });
+    });
   } else if (pathname === "/delete") {
     var receive_data = "";
     request.on("data", function (data) {
